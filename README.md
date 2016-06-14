@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/atmarksharp/d-anime-app/master/icon.png" alt="icon" style="max-width: 200px;"/>
 
-dアニメストアを表示するだけのOSX向けElectronアプリです。
+dアニメストアを表示するだけのOSX向けアプリです。[Electron](http://electron.atom.io/)をベースに作っています。
 
 自分用に作ったので、動作の保証はできません。
 
