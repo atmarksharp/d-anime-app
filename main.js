@@ -3,11 +3,17 @@ const {app} = electron;
 const {BrowserWindow} = electron;
 const {globalShortcut} = electron;
 
-// let loadOpt = { userAgent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"};
-let win;
+let win = null;
 let winId = 0;
 
+app.commandLine.appendSwitch('widevine-cdm-path', `${app.getAppPath()}/widevinecdmadapter.plugin`);
+app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.866');
+
 function getZoomFactor(_win){
+  if( _win === null ){
+    return 1.0;
+  }
+
   if ( typeof _win.__zoomFactor === "undefined" ) {
     _win['__zoomFactor'] = 1.0;
   }
@@ -16,6 +22,9 @@ function getZoomFactor(_win){
 }
 
 function setZoomFactor(_win, value){
+  if( _win === null ){
+    return;
+  }
   _win['__zoomFactor'] = value;
 }
 
@@ -34,16 +43,7 @@ function createWindow() {
   win.on('closed', () => {
     win = null;
   });
-
-  win.on('app-command', (e, cmd) => {
-    win.webContents.goBack();
-  });
 }
-
-app.commandLine.appendSwitch('widevine-cdm-path', `widevinecdmadapter.plugin`);
-app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.866');
-
-
 
 app.on('ready', () => {
 
@@ -77,9 +77,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
 
 app.on('browser-window-created', (e, _win) => {
