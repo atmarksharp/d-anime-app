@@ -12,8 +12,9 @@ OSX向けに作っていますが、コードを修正すればWindows/Linuxで�
 
 ## ショートカットキー
 
-- Command + [+]: 拡大
+- Command + [+/=]: 拡大
 - Command + [-]: 縮小
+- Command + [0]: 原寸表示
 
 ## ビルド
 
