@@ -1,6 +1,6 @@
 ## d-anime-app
 
-![icon](https://raw.githubusercontent.com/atmarksharp/d-anime-app/master/icon.png)
+<img src="https://raw.githubusercontent.com/atmarksharp/d-anime-app/master/icon.png" alt="icon" style="max-width: 200px;"/>
 
 dアニメストアを表示するだけのOSX向けElectronアプリです。
 
