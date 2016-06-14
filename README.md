@@ -19,6 +19,8 @@ OSX向けに作っていますが、コードを修正すればWindows/Linuxで�
 ## ビルド
 
 ```bash
+git clone https://github.com/atmarksharp/d-anime-app
+cd d-anime-app
 npm install
 npm run-script build-osx
 ```
