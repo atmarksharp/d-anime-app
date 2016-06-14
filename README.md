@@ -1,6 +1,8 @@
 ## d-anime-app
 
-dアニメストアを表示するだけのElectronアプリです。
+![icon](https://raw.githubusercontent.com/atmarksharp/d-anime-app/master/icon.png)
+
+dアニメストアを表示するだけのOSX向けElectronアプリです。
 
 自分用に作ったので、動作の保証はできません。
 
