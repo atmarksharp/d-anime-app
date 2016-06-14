@@ -8,7 +8,7 @@ let win;
 let winId = 0;
 
 function getZoomFactor(_win){
-  if ( typeof _win.__zoomFactor == "undefined" ) {
+  if ( typeof _win.__zoomFactor === "undefined" ) {
     _win['__zoomFactor'] = 1.0;
   }
 
@@ -16,10 +16,6 @@ function getZoomFactor(_win){
 }
 
 function setZoomFactor(_win, value){
-  if ( typeof _win.__zoomFactor == "undefined" ) {
-    _win['__zoomFactor'] = 1.0;
-  }
-
   _win['__zoomFactor'] = value;
 }
 
@@ -44,7 +40,7 @@ function createWindow() {
   });
 }
 
-app.commandLine.appendSwitch('widevine-cdm-path', `${__dirname}/widevinecdmadapter.plugin`);
+app.commandLine.appendSwitch('widevine-cdm-path', `widevinecdmadapter.plugin`);
 app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.866');
 
 
