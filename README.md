@@ -18,11 +18,27 @@ OSX向けに作っていますが、コードを修正すればWindows/Linuxで�
 
 ## ビルド
 
+まずはリポジトリをクローン。
+
 ```bash
 git clone https://github.com/atmarksharp/d-anime-app
 cd d-anime-app
+```
+
+次に[Using Widevine CDM Plugin](http://electron.atom.io/docs/tutorial/using-widevine-cdm-plugin/)の手順に従い、`libwidevinecdm.dylib` 及び `widevinecdmadapter.plugin`をディレクトリのルートにコピーします。
+
+Widevine CDMのバージョンに応じて、`main.js`の以下の部分を修正します。
+
+```bash
+app.commandLine.appendSwitch('widevine-cdm-path', `${app.getAppPath()}/widevinecdmadapter.plugin`);
+app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.866');
+```
+
+そして以下のスクリプトを実行。アプリケーションが生成されます。
+
+```bash
 npm install
 npm run-script build-osx
 ```
 
-完成した実行ファイルは `built/` 以下に配置されます。
+完成したアプリケーションは `built/` 以下にあります。
