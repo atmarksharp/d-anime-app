@@ -29,7 +29,7 @@ cd d-anime-app
 
 さらに、Widevine CDMのバージョンに応じて、`main.js`の以下の部分を修正します。
 
-```bash
+```js
 app.commandLine.appendSwitch('widevine-cdm-path', `${app.getAppPath()}/widevinecdmadapter.plugin`);
 app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.866');
 ```
