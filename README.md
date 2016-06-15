@@ -25,9 +25,9 @@ git clone https://github.com/atmarksharp/d-anime-app
 cd d-anime-app
 ```
 
-次に[Using Widevine CDM Plugin](http://electron.atom.io/docs/tutorial/using-widevine-cdm-plugin/)の手順に従い、`libwidevinecdm.dylib` 及び `widevinecdmadapter.plugin`をディレクトリのルートにコピーします。
+次に[Using Widevine CDM Plugin](http://electron.atom.io/docs/tutorial/using-widevine-cdm-plugin/)の手順に従い、`libwidevinecdm.dylib` 及び `widevinecdmadapter.plugin`をプロジェクトのルートフォルダにコピーします。
 
-Widevine CDMのバージョンに応じて、`main.js`の以下の部分を修正します。
+さらに、Widevine CDMのバージョンに応じて、`main.js`の以下の部分を修正します。
 
 ```bash
 app.commandLine.appendSwitch('widevine-cdm-path', `${app.getAppPath()}/widevinecdmadapter.plugin`);
