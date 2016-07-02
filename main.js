@@ -43,6 +43,22 @@ function createWindow() {
   });
 }
 
+function applyZoom(value, absolute = false){
+  let zoom = getZoomFactor(win);
+  if(absolute === true){
+    zoom = 1.0;
+  }
+
+  setZoomFactor(win, zoom * value);
+  if(win.webContents !== null){
+    win.webContents.insertCSS(`body { transform-origin: left top; transform: scale(${zoom * value}) }`);
+  }
+}
+
+function unregisterShortcuts(){
+  globalShortcut.unregisterAll();
+}
+
 function registerShortcuts(){
   function registerShortcut(cmd,handler){
     if(globalShortcut.isRegistered(cmd) === false){
@@ -80,17 +96,6 @@ function registerShortcuts(){
 }
 
 app.on('ready', () => {
-
-  function applyZoom(value, absolute = false){
-    let zoom = getZoomFactor(win);
-    if(absolute === true){
-      zoom = 1.0;
-    }
-
-    setZoomFactor(win, zoom * value);
-    win.webContents.insertCSS(`body { transform-origin: left top; transform: scale(${zoom * value}) }`);
-  }
-
   registerShortcuts();
   createWindow();
 });
@@ -100,7 +105,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('will-quit', () => {
-  globalShortcut.unregisterAll();
+  unregisterShortcuts();
 });
 
 app.on('browser-window-created', (e, _win) => {
@@ -113,7 +118,7 @@ app.on('browser-window-focus', (e, _win) => {
 });
 
 app.on('browser-window-blur', (e, _win) => {
-  globalShortcut.unregisterAll();
+  unregisterShortcuts();
 });
 
 app.on('activate', () => {
