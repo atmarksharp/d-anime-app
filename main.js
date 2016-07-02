@@ -1,7 +1,5 @@
 const electron = require('electron');
-const {app} = electron;
-const {BrowserWindow} = electron;
-const {globalShortcut} = electron;
+const {app, BrowserWindow, globalShortcut} = electron;
 
 let win = null;
 let winId = 0;
@@ -45,6 +43,42 @@ function createWindow() {
   });
 }
 
+function registerShortcuts(){
+  function registerShortcut(cmd,handler){
+    if(globalShortcut.isRegistered(cmd) === false){
+      globalShortcut.register(cmd, handler);
+    }
+  }
+
+  registerShortcut('Backspace', () => {
+    if(win.webContents.canGoBack()){
+      win.webContents.goBack();
+    }
+  });
+
+  registerShortcut('Shift+Backspace', () => {
+    if(win.webContents.canGoForward()){
+      win.webContents.goForward();
+    }
+  });
+
+  registerShortcut('CmdOrCtrl+-', () => {
+    applyZoom(0.8);
+  });
+
+  registerShortcut('CmdOrCtrl+Plus', () => {
+    applyZoom(1.25);
+  });
+
+  registerShortcut('CmdOrCtrl+=', () => {
+    applyZoom(1.25);
+  });
+
+  registerShortcut('CmdOrCtrl+0', () => {
+    applyZoom(1.0, true);
+  });
+}
+
 app.on('ready', () => {
 
   function applyZoom(value, absolute = false){
@@ -57,39 +91,16 @@ app.on('ready', () => {
     win.webContents.insertCSS(`body { transform-origin: left top; transform: scale(${zoom * value}) }`);
   }
 
-  globalShortcut.register('Backspace', () => {
-    if(win.webContents.canGoBack()){
-      win.webContents.goBack();
-    }
-  });
-
-  globalShortcut.register('Shift+Backspace', () => {
-    if(win.webContents.canGoForward()){
-      win.webContents.goForward();
-    }
-  });
-
-  globalShortcut.register('CmdOrCtrl+-', () => {
-    applyZoom(0.8);
-  });
-
-  globalShortcut.register('CmdOrCtrl+Plus', () => {
-    applyZoom(1.25);
-  });
-
-  globalShortcut.register('CmdOrCtrl+=', () => {
-    applyZoom(1.25);
-  });
-
-  globalShortcut.register('CmdOrCtrl+0', () => {
-    applyZoom(1.0, true);
-  });
-
+  registerShortcuts();
   createWindow();
 });
 
 app.on('window-all-closed', () => {
   app.quit();
+});
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
 });
 
 app.on('browser-window-created', (e, _win) => {
@@ -98,6 +109,11 @@ app.on('browser-window-created', (e, _win) => {
 
 app.on('browser-window-focus', (e, _win) => {
   win = _win;
+  registerShortcuts();
+});
+
+app.on('browser-window-blur', (e, _win) => {
+  globalShortcut.unregisterAll();
 });
 
 app.on('activate', () => {
