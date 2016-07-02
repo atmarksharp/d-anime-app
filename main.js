@@ -96,7 +96,6 @@ function registerShortcuts(){
 }
 
 app.on('ready', () => {
-  registerShortcuts();
   createWindow();
 });
 
@@ -115,10 +114,12 @@ app.on('browser-window-created', (e, _win) => {
 app.on('browser-window-focus', (e, _win) => {
   win = _win;
   registerShortcuts();
+  console.log('Event: browser-window-focus');
 });
 
 app.on('browser-window-blur', (e, _win) => {
   unregisterShortcuts();
+  console.log('Event: browser-window-blur');
 });
 
 app.on('activate', () => {
