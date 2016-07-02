@@ -57,6 +57,18 @@ app.on('ready', () => {
     win.webContents.insertCSS(`body { transform-origin: left top; transform: scale(${zoom * value}) }`);
   }
 
+  globalShortcut.register('Backspace', () => {
+    if(win.webContents.canGoBack()){
+      win.webContents.goBack();
+    }
+  });
+
+  globalShortcut.register('Shift+Backspace', () => {
+    if(win.webContents.canGoForward()){
+      win.webContents.goForward();
+    }
+  });
+
   globalShortcut.register('CmdOrCtrl+-', () => {
     applyZoom(0.8);
   });
