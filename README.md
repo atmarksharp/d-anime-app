@@ -12,6 +12,8 @@ OSX向けに作っていますが、コードを修正すればWindows/Linuxで�
 
 ## ショートカットキー
 
+- Backspace: 戻る
+- Shift + Backspace: 進む
 - Command + [+/=]: 拡大
 - Command + [-]: 縮小
 - Command + [0]: 原寸表示
